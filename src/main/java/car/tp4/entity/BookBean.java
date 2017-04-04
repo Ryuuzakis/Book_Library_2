@@ -11,15 +11,15 @@ import java.util.List;
 @Local
 public class BookBean {
 
-  @PersistenceContext(unitName = "book-pu")
-  private EntityManager entityManager;
+	@PersistenceContext(unitName = "book-pu")
+	private EntityManager entityManager;
 
-  public void addBook(Book book) {
-    entityManager.persist(book);
-  }
+	public void addBook(Book book) {
+		entityManager.persist(book);
+	}
 
-  public List<Book> getAllBooks() {
-    Query query = entityManager.createQuery("SELECT m from Book as m");
-    return query.getResultList();
-  }
+	public List<Book> getAllBooks() {
+		Query query = entityManager.createQuery("SELECT m from Book as m");
+		return query.getResultList();
+	}
 }

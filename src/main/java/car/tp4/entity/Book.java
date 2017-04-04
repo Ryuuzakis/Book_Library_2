@@ -7,58 +7,62 @@ import javax.persistence.Id;
 
 @Entity
 public class Book {
-  @Id
-  @GeneratedValue(strategy= GenerationType.AUTO)
-  private long id;
-  private String author;
-  private String title;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
+	private String author;
+	private String title;
 
-  public Book(String author, String title) {
-    this.author = author;
-    this.title = title;
-  }
+	public Book() {
+	}
 
-  public String getAuthor() {
-    return author;
-  }
+	public Book(String author, String title) {
+		this.author = author;
+		this.title = title;
+	}
 
-  public void setAuthor(String author) {
-    this.author = author;
-  }
+	public String getAuthor() {
+		return author;
+	}
 
-  public String getTitle() {
-    return title;
-  }
+	public void setAuthor(String author) {
+		this.author = author;
+	}
 
-  public void setTitle(String title) {
-    this.title = title;
-  }
+	public String getTitle() {
+		return title;
+	}
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    Book book = (Book) o;
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
 
-    if (id != book.id) return false;
-    if (!author.equals(book.author)) return false;
-    return title.equals(book.title);
-  }
+		Book book = (Book) o;
 
-  @Override
-  public int hashCode() {
-    int result = (int) (id ^ (id >>> 32));
-    result = 31 * result + author.hashCode();
-    result = 31 * result + title.hashCode();
-    return result;
-  }
+		if (id != book.id)
+			return false;
+		if (!author.equals(book.author))
+			return false;
+		return title.equals(book.title);
+	}
 
-  @Override
-  public String toString() {
-    return "Book{" +
-      "author='" + author + '\'' +
-      ", title='" + title + '\'' +
-      '}';
-  }
+	@Override
+	public int hashCode() {
+		int result = (int) (id ^ (id >>> 32));
+		result = 31 * result + author.hashCode();
+		result = 31 * result + title.hashCode();
+		return result;
+	}
+
+	@Override
+	public String toString() {
+		return "Book{" + "author='" + author + '\'' + ", title='" + title + '\'' + '}';
+	}
 }
