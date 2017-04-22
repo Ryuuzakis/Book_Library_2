@@ -3,6 +3,7 @@ package car.tp4.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,7 +16,7 @@ public class BookOrder {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL)
 	private List<OrderEntry> orderEntries;
 
 	public BookOrder() {

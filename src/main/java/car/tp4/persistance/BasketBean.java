@@ -3,18 +3,17 @@ package car.tp4.persistance;
 import java.util.List;
 
 import javax.ejb.Local;
-import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 
 import car.tp4.entity.Book;
 import car.tp4.entity.BookOrder;
 import car.tp4.entity.OrderEntry;
 
-@Stateful
+@Stateless
 @Local
 public class BasketBean {
-	private final BookOrder order = new BookOrder();
 
-	public void addBook(final Book book, final int quantity) {
+	public void addBook(final BookOrder order, final Book book, final int quantity) {
 		final List<OrderEntry> orderEntries = order.getOrderEntries();
 
 		for (int i = 0 ; i < orderEntries.size() ; i++) {
@@ -30,9 +29,5 @@ public class BasketBean {
 		}
 
 		orderEntries.add(new OrderEntry(quantity, book));
-	}
-
-	public BookOrder getBasket() {
-		return order;
 	}
 }

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import car.tp4.entity.BookOrder;
 import car.tp4.services.BasketService;
 
 @WebServlet("/basket")
@@ -21,17 +22,23 @@ public class BasketServlet extends HttpServlet {
 
 	@EJB
 	private BasketService basketService;
-	
+
 	@Override
 	protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
 			throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
-		
+
 		final long bookId = Long.parseLong(request.getParameter("bookId"));
 		final int quantity = Integer.parseInt(request.getParameter("quantity"));
+		BookOrder basket = (BookOrder) request.getSession().getAttribute("basket");
 
-		basketService.addBook(bookId, quantity);
+		if (basket == null) {
+			basket = new BookOrder();
+		}
+
+		basketService.addBook(basket, bookId, quantity);
+		request.getSession().setAttribute("basket", basket);
 
 		response.sendRedirect("/books");
 	}

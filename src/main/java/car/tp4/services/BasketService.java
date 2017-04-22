@@ -16,12 +16,8 @@ public class BasketService {
 	@EJB
 	private BookBean bookBean;
 	
-	public void addBook(final long bookId, final int quantity) {
+	public void addBook(final BookOrder order, final long bookId, final int quantity) {
 		final Book book = bookBean.getBookById(bookId);
-		basketBean.addBook(book, quantity);
-	}
-
-	public BookOrder getBasket() {
-		return basketBean.getBasket();
+		basketBean.addBook(order, book, quantity);
 	}
 }

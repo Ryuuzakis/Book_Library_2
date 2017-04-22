@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import car.tp4.entity.BookOrder;
 import car.tp4.services.BasketService;
 import car.tp4.services.BookService;
 
@@ -31,8 +32,15 @@ public class BookServlet extends HttpServlet {
 	protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
 			throws ServletException, IOException {
 
+		BookOrder basket = (BookOrder) request.getSession().getAttribute("basket");
+		if (basket == null) {
+			basket = new BookOrder();
+		}
+		
+		
+		request.getSession().getAttribute("basket");
 		request.setAttribute("books", bookService.getAllBooks());
-		request.setAttribute("basket", basketService.getBasket());
+		request.setAttribute("basket", basket);
 		final RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/book.jsp");
 		dispatcher.forward(request, response);
 	}

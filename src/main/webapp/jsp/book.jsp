@@ -41,10 +41,14 @@
                 	<form action="basket" method="POST">
                 		<input type="hidden" value="<%= entry.getBook().getId() %>" name="bookId" />
                 		<label></label><input type="number" value="<%= entry.getQuantity() %>" name="quantity" />
+                		<input type="submit" value="valider" />
                 	</form>
                 </p>
                 <%
             }
         %>
+        <form action="order" method="POST">
+       		<input type="submit" value="Valider le panier" />
+        </form>
     </body>
 </html>
