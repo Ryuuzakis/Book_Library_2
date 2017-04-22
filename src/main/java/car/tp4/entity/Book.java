@@ -12,20 +12,32 @@ public class Book {
 	private long id;
 	private String author;
 	private String title;
+	private int year;
 
 	public Book() {
 	}
 
-	public Book(String author, String title) {
+	public Book(final String author, final String title, final int year) {
 		this.author = author;
 		this.title = title;
+		this.setYear(year);
+	}
+	
+	
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(final long id) {
+		this.id = id;
 	}
 
 	public String getAuthor() {
 		return author;
 	}
 
-	public void setAuthor(String author) {
+	public void setAuthor(final String author) {
 		this.author = author;
 	}
 
@@ -33,36 +45,65 @@ public class Book {
 		return title;
 	}
 
-	public void setTitle(String title) {
+	public void setTitle(final String title) {
 		this.title = title;
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o)
+	public boolean equals(final Object obj) {
+		if (this == obj)
 			return true;
-		if (o == null || getClass() != o.getClass())
+		if (obj == null)
 			return false;
-
-		Book book = (Book) o;
-
-		if (id != book.id)
+		if (getClass() != obj.getClass())
 			return false;
-		if (!author.equals(book.author))
+		final Book other = (Book) obj;
+		if (author == null) {
+			if (other.author != null)
+				return false;
+		} else if (!author.equals(other.author))
 			return false;
-		return title.equals(book.title);
+		if (id != other.id)
+			return false;
+		if (title == null) {
+			if (other.title != null)
+				return false;
+		} else if (!title.equals(other.title))
+			return false;
+		if (year != other.year)
+			return false;
+		return true;
 	}
 
 	@Override
 	public int hashCode() {
-		int result = (int) (id ^ (id >>> 32));
-		result = 31 * result + author.hashCode();
-		result = 31 * result + title.hashCode();
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((author == null) ? 0 : author.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((title == null) ? 0 : title.hashCode());
+		result = prime * result + year;
 		return result;
 	}
 
 	@Override
 	public String toString() {
-		return "Book{" + "author='" + author + '\'' + ", title='" + title + '\'' + '}';
+		return "Book{" + "author='" + author + '\'' + ", title='" + title
+				+ '\'' + '}';
+	}
+
+	/**
+	 * @return the year
+	 */
+	public int getYear() {
+		return year;
+	}
+
+	/**
+	 * @param year
+	 *            the year to set
+	 */
+	public void setYear(final int year) {
+		this.year = year;
 	}
 }

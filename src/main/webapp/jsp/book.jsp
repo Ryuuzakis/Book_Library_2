@@ -1,3 +1,5 @@
+<%@page import="car.tp4.entity.OrderEntry"%>
+<%@page import="car.tp4.entity.BookOrder"%>
 <%@page import="car.tp4.entity.Book"%>
 <%@page import="java.util.Collection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -13,8 +15,35 @@
             Collection<Book> books = (Collection<Book>) request.getAttribute("books");
 
             for (Book book: books) {
-                out.print("Author: " + book.getAuthor() + ", Title: " + book.getTitle());
-                out.print("\n");
+            	%>
+            	<p>
+                	Author: <%= book.getAuthor() %><br />
+                	Title: 	<%= book.getTitle() %><br />
+                	<form action="basket" method="POST">
+                		<input type="hidden" value="<%= book.getId() %>" name="bookId" />
+                		<input type="hidden" value="1" name="quantity" />
+                		<input type="submit" value="Ajouter au panier" />
+                	</form>
+                </p>
+                <%
+            }
+        %>
+        
+        <h2>Basket</h2>
+        <%
+            BookOrder basket = (BookOrder) request.getAttribute("basket");
+
+            for (OrderEntry entry: basket.getOrderEntries()) {
+            	%>
+            	<p>
+                	Title: 	<%= entry.getBook().getTitle() %>
+                	Quantity: <%= entry.getQuantity() %>
+                	<form action="basket" method="POST">
+                		<input type="hidden" value="<%= entry.getBook().getId() %>" name="bookId" />
+                		<label></label><input type="number" value="<%= entry.getQuantity() %>" name="quantity" />
+                	</form>
+                </p>
+                <%
             }
         %>
     </body>

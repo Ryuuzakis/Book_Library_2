@@ -6,7 +6,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import car.tp4.entity.Book;
-import car.tp4.entity.BookBean;
+import car.tp4.persistance.BookBean;
 
 @Stateless
 public class BookService {
@@ -14,7 +14,7 @@ public class BookService {
 	@EJB
 	private BookBean bookBean;
 
-	public void addBook(Book book) {
+	public void addBook(final Book book) {
 		bookBean.addBook(book);
 	}
 
