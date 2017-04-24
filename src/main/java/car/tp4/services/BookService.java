@@ -6,7 +6,9 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import car.tp4.entity.Book;
+import car.tp4.entity.BookOrder;
 import car.tp4.exceptions.NegativeQuantityException;
+import car.tp4.exceptions.StockUnavailableException;
 import car.tp4.persistence.BookBean;
 
 /**
@@ -68,5 +70,14 @@ public class BookService {
 
 		book.setQuantity(book.getQuantity() + qty);
 		bookBean.addBook(book);
+	}
+	
+	/**
+	 * Remove the order from the stock. Throw an error if not enouth stock
+	 * @param order
+	 * @throws StockUnavailableException 
+	 */
+	public void validateOrder(final BookOrder order) throws StockUnavailableException {
+		bookBean.validateOrder(order);
 	}
 }

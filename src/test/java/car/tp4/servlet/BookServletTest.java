@@ -54,8 +54,8 @@ public class BookServletTest {
 	public void doGetTest() throws ServletException, IOException {
 		bookServlet.doGet(request, response);
 
-		Mockito.verify(request, Mockito.times(2)).getSession();
-		Mockito.verify(session, Mockito.times(2)).getAttribute("basket");
+		Mockito.verify(request, Mockito.times(1)).getSession();
+		Mockito.verify(session, Mockito.times(1)).getAttribute("basket");
 		Mockito.verify(request).setAttribute(Mockito.eq("books"), Mockito.any());
 		Mockito.verify(request).setAttribute(Mockito.eq("basket"), Mockito.any());
 		
