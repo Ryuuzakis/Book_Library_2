@@ -14,5 +14,6 @@
                 <br/>
                 <input type="submit" value="Send" />
             </form>
+            <a href="/books">Retour</a>
     </body>
 </html>

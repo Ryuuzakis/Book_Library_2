@@ -21,4 +21,12 @@ public class BookService {
 	public List<Book> getAllBooks() {
 		return bookBean.getAllBooks();
 	}
+
+	public List<Book> getAllBooksYearAsc() {
+		return bookBean.getAllBooksOrderedByYearAsc();
+	}
+
+	public List<Book> getAllBooksYearDesc() {
+		return bookBean.getAllBooksOrderedByYearDesc();
+	}
 }

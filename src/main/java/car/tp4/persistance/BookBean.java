@@ -30,4 +30,15 @@ public class BookBean {
 		final Query query = entityManager.createQuery("SELECT m from Book as m");
 		return query.getResultList();
 	}
+
+	public List<Book> getAllBooksOrderedByYearAsc() {
+		final Query query = entityManager.createQuery("SELECT m from Book as m order by m.year ASC");
+		return query.getResultList();
+	}
+
+	public List<Book> getAllBooksOrderedByYearDesc() {
+		final Query query = entityManager.createQuery("SELECT m from Book as m order by m.year DESC");
+		return query.getResultList();
+	}
+
 }

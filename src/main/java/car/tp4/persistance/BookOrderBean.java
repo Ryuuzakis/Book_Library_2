@@ -28,7 +28,7 @@ public class BookOrderBean {
 	}
 
 	public List<BookOrder> getAllOrders() {
-		final Query query = entityManager.createQuery("SELECT o, e from BookOrder as o inner join OrderEntry as e on e.id = o.OrderEntry");
+		final Query query = entityManager.createQuery("SELECT o, e from BookOrder as o JOIN OrderEntry as e on e.id = o.OrderEntry");
 		return query.getResultList();
 	}
 }

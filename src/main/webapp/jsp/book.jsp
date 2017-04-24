@@ -10,6 +10,11 @@
         <title>Home</title>
     </head>
     <body>
+        <h2>Ajouter un livre</h2>
+        <form action="create" method="GET">
+            <input type="submit" value="Créer un nouveau livre"/>
+        </form>
+
         <h2>Existing books</h2>
         <%
             Collection<Book> books = (Collection<Book>) request.getAttribute("books");
@@ -19,6 +24,7 @@
             	<p>
                 	Author: <%= book.getAuthor() %><br />
                 	Title: 	<%= book.getTitle() %><br />
+                	Year: 	<%= book.getYear() %><br />
                 	<form action="basket" method="POST">
                 		<input type="hidden" value="<%= book.getId() %>" name="bookId" />
                 		<input type="hidden" value="1" name="quantity" />
@@ -28,7 +34,10 @@
                 <%
             }
         %>
-        
+
+        <a href="/books?order=asc">Trier par année de parution croissante</a> <br />
+        <a href="/books?order=desc">Trier par année de parution décroissante</a>
+
         <h2>Basket</h2>
         <%
             BookOrder basket = (BookOrder) request.getAttribute("basket");
