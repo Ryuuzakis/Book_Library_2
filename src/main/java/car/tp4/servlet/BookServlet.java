@@ -1,7 +1,9 @@
 package car.tp4.servlet;
 
-import java.io.IOException;
-import java.util.List;
+import car.tp4.entity.Book;
+import car.tp4.entity.BookOrder;
+import car.tp4.services.BasketService;
+import car.tp4.services.BookService;
 
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -10,11 +12,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import car.tp4.entity.Book;
-import car.tp4.entity.BookOrder;
-import car.tp4.services.BasketService;
-import car.tp4.services.BookService;
+import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/books")
 public class BookServlet extends HttpServlet {
@@ -26,7 +25,7 @@ public class BookServlet extends HttpServlet {
 
 	@EJB
 	private BookService bookService;
-	
+
 	@EJB
 	private BasketService basketService;
 
@@ -55,18 +54,30 @@ public class BookServlet extends HttpServlet {
 	 */
 	protected List<Book> getBooks(final HttpServletRequest request) {
 		String order = request.getParameter("order");
+		String authorQuery = request.getParameter("author");
+		String titleQuery = request.getParameter("title");
+		String availabilityFilter = request.getParameter("available");
+
+		if (authorQuery == null) {
+			authorQuery = "";
+		}
+		if (titleQuery == null) {
+			titleQuery = "";
+		}
+
+		boolean allBooks = (availabilityFilter == null || availabilityFilter.equals("all"));
 		int orderValue = order == null ? -1 : order.equals("asc") ? 1 : 2;
 
 		List<Book> books = null;
 		switch(orderValue) {
 			case 1:
-				books = bookService.getAllBooksYearAsc();
+				books = bookService.getBooksOrderedByYear(authorQuery, titleQuery, true, allBooks);
 				break;
 			case 2:
-				books = bookService.getAllBooksYearDesc();
+				books = bookService.getBooksOrderedByYear(authorQuery, titleQuery, false, allBooks);
 				break;
 			default:
-				books = bookService.getAllBooks();
+				books = bookService.getBooks(authorQuery, titleQuery, allBooks);
 				break;
 		}
 

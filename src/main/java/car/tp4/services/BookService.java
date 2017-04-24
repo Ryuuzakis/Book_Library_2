@@ -18,15 +18,26 @@ public class BookService {
 		bookBean.addBook(book);
 	}
 
-	public List<Book> getAllBooks() {
-		return bookBean.getAllBooks();
+	public List<Book> getBooks(String author, String title, boolean allBooks) {
+		return bookBean.getBooks(author, title, allBooks);
 	}
 
-	public List<Book> getAllBooksYearAsc() {
-		return bookBean.getAllBooksOrderedByYearAsc();
+	public List<Book> getBooksOrderedByYear(String author, String title, boolean asc, boolean allBooks) {
+		if (asc) {
+			return bookBean.getBooksOrderedByYearAsc(author, title, allBooks);
+		} else {
+			return bookBean.getBooksOrderedByYearDesc(author, title, allBooks);
+		}
 	}
 
-	public List<Book> getAllBooksYearDesc() {
-		return bookBean.getAllBooksOrderedByYearDesc();
+	public void addQuantity(final long bookId, final int qty) {
+		final Book book = bookBean.getBookById(bookId);
+
+		if (qty < 1) {
+			// TODO: error
+		}
+
+		book.setQuantity(book.getQuantity() + qty);
+		bookBean.addBook(book);
 	}
 }

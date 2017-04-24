@@ -1,4 +1,4 @@
-<%@page import="car.tp4.entity.Stock"%>
+<%@page import="car.tp4.entity.Book"%>
 <%@page import="java.util.Collection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -10,14 +10,14 @@
     <body>
         <h2>Books stock</h2>
         <%
-            Collection<Stock> stocks = (Collection<Stock>) request.getAttribute("stocks");
+            Collection<Book> stocks = (Collection<Book>) request.getAttribute("stocks");
 
-            for (Stock stock: stocks) {
+            for (Book stock: stocks) {
             	%>
             	<div>
             		<form method="POST" action="stock">
-                	Author: <%= stock.getBook().getAuthor() %><br />
-                	Title: 	<%= stock.getBook().getTitle() %><br />
+                	Author: <%= stock.getAuthor() %><br />
+                	Title: 	<%= stock.getTitle() %><br />
                 	Quantity: 	<%= stock.getQuantity() %><br />
                 		<input type="hidden" name="stockId" value="<%= stock.getId()  %>">
                 		<label for="quantity">Ajouter au stock : </label><input type="number" name="quantity" value="0">

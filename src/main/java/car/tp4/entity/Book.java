@@ -13,6 +13,7 @@ public class Book {
 	private String author;
 	private String title;
 	private int year;
+	private int quantity;
 
 	public Book() {
 	}
@@ -22,7 +23,14 @@ public class Book {
 		this.setTitle(title);
 		this.setYear(year);
 	}
-	
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
 
 	public long getId() {
 		return id;
@@ -87,8 +95,13 @@ public class Book {
 
 	@Override
 	public String toString() {
-		return "Book{" + "author='" + author + '\'' + ", title='" + title
-				+ '\'' + '}';
+		return "Book{" +
+				"id=" + id +
+				", author='" + author + '\'' +
+				", title='" + title + '\'' +
+				", year=" + year +
+				", quantity=" + quantity +
+				'}';
 	}
 
 	/**

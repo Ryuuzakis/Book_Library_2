@@ -1,6 +1,7 @@
 package car.tp4.servlet;
 
-import java.io.IOException;
+import car.tp4.entity.Book;
+import car.tp4.services.BookService;
 
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -9,11 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import car.tp4.entity.Book;
-import car.tp4.entity.Stock;
-import car.tp4.services.BookService;
-import car.tp4.services.StockService;
+import java.io.IOException;
 
 @WebServlet("/create")
 public class CreateBookServlet extends HttpServlet {
@@ -26,8 +23,6 @@ public class CreateBookServlet extends HttpServlet {
 	@EJB
 	private BookService bookService;
 	
-	@EJB private StockService stockService;
-
 	@Override
 	protected void doGet(final HttpServletRequest request,
 			final HttpServletResponse response) throws ServletException,
@@ -53,7 +48,6 @@ public class CreateBookServlet extends HttpServlet {
 
 		final Book book = new Book(author, title, year);
 		bookService.addBook(book);
-		stockService.addStock(new Stock(book, 0));
 
 		final RequestDispatcher dispatcher = getServletContext()
 				.getRequestDispatcher("/jsp/create-valid.jsp");
