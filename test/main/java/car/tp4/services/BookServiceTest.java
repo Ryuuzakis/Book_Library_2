@@ -29,9 +29,20 @@ public class BookServiceTest {
 	
 	@Test
 	public void getAllBooksTest() {
-		final Book b = Mockito.mock(Book.class);
 		bookService.getAllBooks();
 		Mockito.verify(bookBean).getAllBooks();
+	}
+	
+	@Test
+	public void getAllBooksYearAscTest() {
+		bookService.getAllBooksYearAsc();
+		Mockito.verify(bookBean).getAllBooksOrderedByYearAsc();
+	}
+	
+	@Test
+	public void getAllBooksYearDescTest() {
+		bookService.getAllBooksYearDesc();
+		Mockito.verify(bookBean).getAllBooksOrderedByYearDesc();
 	}
 
 }

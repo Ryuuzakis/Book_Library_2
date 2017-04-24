@@ -15,6 +15,12 @@ import car.tp4.entity.Stock;
 import car.tp4.services.BookService;
 import car.tp4.services.StockService;
 
+/**
+ * 
+ * @author Louis GUILBERT & Jonathan Lecointe
+ *
+ *         CreateBookServlet : controlleur de la création de livre
+ */
 @WebServlet("/create")
 public class CreateBookServlet extends HttpServlet {
 
@@ -25,25 +31,29 @@ public class CreateBookServlet extends HttpServlet {
 
 	@EJB
 	private BookService bookService;
-	
-	@EJB private StockService stockService;
+
+	@EJB
+	private StockService stockService;
+
+	protected void setStockService(final StockService stockService) {
+		this.stockService = stockService;
+	}
+
+	protected void setBookService(final BookService bookService) {
+		this.bookService = bookService;
+	}
 
 	@Override
-	protected void doGet(final HttpServletRequest request,
-			final HttpServletResponse response) throws ServletException,
-			IOException {
+	protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
+			throws ServletException, IOException {
 
-		System.out.println("create get");
-
-		final RequestDispatcher dispatcher = getServletContext()
-				.getRequestDispatcher("/jsp/create.jsp");
+		final RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/create.jsp");
 		dispatcher.forward(request, response);
 	}
 
 	@Override
-	protected void doPost(final HttpServletRequest request,
-			final HttpServletResponse response) throws ServletException,
-			IOException {
+	protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
+			throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
 
@@ -55,8 +65,7 @@ public class CreateBookServlet extends HttpServlet {
 		bookService.addBook(book);
 		stockService.addStock(new Stock(book, 0));
 
-		final RequestDispatcher dispatcher = getServletContext()
-				.getRequestDispatcher("/jsp/create-valid.jsp");
+		final RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/create-valid.jsp");
 		request.setAttribute("title", title);
 		request.setAttribute("author", author);
 		request.setAttribute("year", year);
