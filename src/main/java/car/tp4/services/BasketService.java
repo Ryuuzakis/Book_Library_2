@@ -9,11 +9,11 @@ import car.tp4.persistence.BasketBean;
 import car.tp4.persistence.BookBean;
 
 /**
+ * BasketService :
+ * 	gère le panier
  *
  * @author Louis GUILBERT & Jonathan LECOINTE
  *
- * BasketService : 
- * gère le panier
  */
 @Stateless
 public class BasketService {
