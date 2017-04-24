@@ -1,9 +1,7 @@
 package car.tp4.servlet;
 
-import car.tp4.entity.Book;
-import car.tp4.entity.BookOrder;
-import car.tp4.services.BasketService;
-import car.tp4.services.BookService;
+import java.io.IOException;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -12,8 +10,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.List;
+
+import car.tp4.entity.Book;
+import car.tp4.entity.BookOrder;
+import car.tp4.services.BasketService;
+import car.tp4.services.BookService;
 
 @WebServlet("/books")
 public class BookServlet extends HttpServlet {
@@ -29,6 +30,14 @@ public class BookServlet extends HttpServlet {
 	@EJB
 	private BasketService basketService;
 
+	protected void setBookService(final BookService bookService) {
+		this.bookService = bookService;
+	}
+	
+	protected void setBasketService(final BasketService basketService) {
+		this.basketService = basketService;
+	}
+	
 	@Override
 	protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
 			throws ServletException, IOException {
@@ -38,7 +47,7 @@ public class BookServlet extends HttpServlet {
 			basket = new BookOrder();
 		}
 
-		List<Book> books = getBooks(request);
+		final List<Book> books = getBooks(request);
 		
 		request.getSession().getAttribute("basket");
 		request.setAttribute("books", books);
@@ -53,10 +62,10 @@ public class BookServlet extends HttpServlet {
 	 * @return la liste des livres à afficher
 	 */
 	protected List<Book> getBooks(final HttpServletRequest request) {
-		String order = request.getParameter("order");
+		final String order = request.getParameter("order");
 		String authorQuery = request.getParameter("author");
 		String titleQuery = request.getParameter("title");
-		String availabilityFilter = request.getParameter("available");
+		final String availabilityFilter = request.getParameter("available");
 
 		if (authorQuery == null) {
 			authorQuery = "";
@@ -65,8 +74,8 @@ public class BookServlet extends HttpServlet {
 			titleQuery = "";
 		}
 
-		boolean allBooks = (availabilityFilter == null || availabilityFilter.equals("all"));
-		int orderValue = order == null ? -1 : order.equals("asc") ? 1 : 2;
+		final boolean allBooks = (availabilityFilter == null || availabilityFilter.equals("all"));
+		final int orderValue = order == null ? -1 : order.equals("asc") ? 1 : 2;
 
 		List<Book> books = null;
 		switch(orderValue) {
@@ -79,10 +88,6 @@ public class BookServlet extends HttpServlet {
 			default:
 				books = bookService.getBooks(authorQuery, titleQuery, allBooks);
 				break;
-		}
-
-		for (Book b : books) {
-			System.out.println(b);
 		}
 
 		return books;

@@ -1,6 +1,6 @@
 package car.tp4.servlet;
 
-import car.tp4.services.BookService;
+import java.io.IOException;
 
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -9,7 +9,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+
+import car.tp4.services.BookService;
 
 @WebServlet("/stock")
 public class StockServlet extends HttpServlet {
@@ -40,7 +41,6 @@ public class StockServlet extends HttpServlet {
 		final long stockId = Long.parseLong(request.getParameter("stockId"));
 		
 		final int quantity = Integer.parseInt(request.getParameter("quantity"));
-
 		bookService.addQuantity(stockId, quantity);
 
 		response.sendRedirect("/stock");
