@@ -6,14 +6,29 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import car.tp4.entity.Book;
-import car.tp4.persistance.BookBean;
+import car.tp4.persistence.BookBean;
 
+/**
+ * 
+ * @author Louis GUILBERT & Jonathan LECOINTe
+ *
+ * BookService : 
+ * gère les fonctionnalités de recherche/ajout de livre
+ */
 @Stateless
 public class BookService {
 
 	@EJB
 	private BookBean bookBean;
 
+	protected void setBookBean(final BookBean bookBean) {
+		this.bookBean = bookBean;
+	}
+
+	/**
+	 * Ajoute un livre à la base
+	 * @param book
+	 */
 	public void addBook(final Book book) {
 		bookBean.addBook(book);
 	}

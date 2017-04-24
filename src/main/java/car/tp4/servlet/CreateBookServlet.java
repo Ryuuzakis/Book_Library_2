@@ -12,6 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * 
+ * @author Louis GUILBERT & Jonathan Lecointe
+ *
+ *         CreateBookServlet : controlleur de la création de livre
+ */
 @WebServlet("/create")
 public class CreateBookServlet extends HttpServlet {
 
@@ -22,23 +28,22 @@ public class CreateBookServlet extends HttpServlet {
 
 	@EJB
 	private BookService bookService;
-	
+
+	protected void setBookService(final BookService bookService) {
+		this.bookService = bookService;
+	}
+
 	@Override
-	protected void doGet(final HttpServletRequest request,
-			final HttpServletResponse response) throws ServletException,
-			IOException {
+	protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
+			throws ServletException, IOException {
 
-		System.out.println("create get");
-
-		final RequestDispatcher dispatcher = getServletContext()
-				.getRequestDispatcher("/jsp/create.jsp");
+		final RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/create.jsp");
 		dispatcher.forward(request, response);
 	}
 
 	@Override
-	protected void doPost(final HttpServletRequest request,
-			final HttpServletResponse response) throws ServletException,
-			IOException {
+	protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
+			throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
 
@@ -49,8 +54,7 @@ public class CreateBookServlet extends HttpServlet {
 		final Book book = new Book(author, title, year);
 		bookService.addBook(book);
 
-		final RequestDispatcher dispatcher = getServletContext()
-				.getRequestDispatcher("/jsp/create-valid.jsp");
+		final RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/create-valid.jsp");
 		request.setAttribute("title", title);
 		request.setAttribute("author", author);
 		request.setAttribute("year", year);

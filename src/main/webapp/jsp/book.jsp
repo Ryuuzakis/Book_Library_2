@@ -61,7 +61,7 @@
         %>
 
         <a href="/books?order=asc">Trier par année de parution croissante</a> <br />
-        
+
         <a href="/books?order=desc">Trier par année de parution décroissante</a>
 
         <h2>Basket</h2>
