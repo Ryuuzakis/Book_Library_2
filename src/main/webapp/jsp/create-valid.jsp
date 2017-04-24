@@ -16,5 +16,8 @@
         <br/>
         <b>Année de parution: </b> <%= year %>
         <br/>
+
+        <a href="/create">Créer un autre livre</a><br />
+        <a href="/books">Allez à la liste des livres</a>
     </body>
 </html>

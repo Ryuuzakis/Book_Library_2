@@ -18,11 +18,10 @@ public class Book {
 	}
 
 	public Book(final String author, final String title, final int year) {
-		this.author = author;
-		this.title = title;
+		this.setAuthor(author);
+		this.setTitle(title);
 		this.setYear(year);
 	}
-	
 	
 
 	public long getId() {
