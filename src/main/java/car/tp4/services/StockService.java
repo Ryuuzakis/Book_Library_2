@@ -6,7 +6,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import car.tp4.entity.Stock;
-import car.tp4.persistance.StockBean;
+import car.tp4.persistence.StockBean;
 
 @Stateless
 public class StockService {

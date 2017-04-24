@@ -1,4 +1,4 @@
-package car.tp4.persistance;
+package car.tp4.persistence;
 
 import java.util.List;
 
@@ -17,6 +17,10 @@ public class StockBean {
 	@PersistenceContext(unitName = "book-pu")
 	private EntityManager entityManager;
 
+	protected void setEntityManager(final EntityManager em) {
+		this.entityManager = em;
+	}
+	
 	public void addStock(final Stock stock) {
 		entityManager.persist(stock);
 	}

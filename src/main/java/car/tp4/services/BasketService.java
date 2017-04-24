@@ -5,8 +5,8 @@ import javax.ejb.Stateless;
 
 import car.tp4.entity.Book;
 import car.tp4.entity.BookOrder;
-import car.tp4.persistance.BasketBean;
-import car.tp4.persistance.BookBean;
+import car.tp4.persistence.BasketBean;
+import car.tp4.persistence.BookBean;
 
 @Stateless
 public class BasketService {

@@ -1,4 +1,4 @@
-package car.tp4.persistance;
+package car.tp4.persistence;
 
 import java.util.List;
 
@@ -17,6 +17,10 @@ public class BookOrderBean {
 	@PersistenceContext(unitName = "book-pu")
 	private EntityManager entityManager;
 
+	protected void setEntityManager(final EntityManager em) {
+		this.entityManager = em;
+	}
+	
 	public void validateOrder(final BookOrder order) {
 		System.out.println(order.getId());
 		entityManager.persist(order);
