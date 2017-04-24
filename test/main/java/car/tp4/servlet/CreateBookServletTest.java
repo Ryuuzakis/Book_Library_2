@@ -13,14 +13,11 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import car.tp4.entity.Book;
-import car.tp4.entity.Stock;
 import car.tp4.services.BookService;
-import car.tp4.services.StockService;
 
 public class CreateBookServletTest {
 	private CreateBookServlet createBookServlet;
 	private BookService bookService;
-	private StockService stockService;
 
 	private RequestDispatcher dispatcher;
 	private ServletContext context;
@@ -40,9 +37,6 @@ public class CreateBookServletTest {
 
 		bookService = Mockito.mock(BookService.class);
 		createBookServlet.setBookService(bookService);
-
-		stockService = Mockito.mock(StockService.class);
-		createBookServlet.setStockService(stockService);
 
 		Mockito.when(context.getRequestDispatcher(Mockito.anyString())).thenReturn(dispatcher);
 		Mockito.doReturn(context).when(createBookServlet).getServletContext();
@@ -68,7 +62,6 @@ public class CreateBookServletTest {
 		Mockito.verify(request).getParameter("year");
 		
 		Mockito.verify(bookService).addBook(Mockito.any(Book.class));
-		Mockito.verify(stockService).addStock(Mockito.any(Stock.class));
 		Mockito.verify(dispatcher).forward(request, response);
 		
 		Mockito.verify(request).setAttribute("title", "toto");

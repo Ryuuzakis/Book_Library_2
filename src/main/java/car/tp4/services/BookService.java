@@ -34,11 +34,18 @@ public class BookService {
 		bookBean.addBook(book);
 	}
 
-	public List<Book> getBooks(String author, String title, boolean allBooks) {
+	/**
+	 * recherche des livres selon l'auteur ou le titre
+	 * @param author
+	 * @param title
+	 * @param allBooks
+	 * @return la liste des livre filtré
+	 */
+	public List<Book> getBooks(final String author, final String title, final boolean allBooks) {
 		return bookBean.getBooks(author, title, allBooks);
 	}
 
-	public List<Book> getBooksOrderedByYear(String author, String title, boolean asc, boolean allBooks) {
+	public List<Book> getBooksOrderedByYear(final String author, final String title, final boolean asc, final boolean allBooks) {
 		if (asc) {
 			return bookBean.getBooksOrderedByYearAsc(author, title, allBooks);
 		} else {
@@ -46,6 +53,12 @@ public class BookService {
 		}
 	}
 
+	/**
+	 * Ajoute une quantité au stock d'un livre
+	 * @param bookId
+	 * @param qty
+	 * @throws NegativeQuantityException
+	 */
 	public void addQuantity(final long bookId, final int qty) throws NegativeQuantityException {
 		final Book book = bookBean.getBookById(bookId);
 

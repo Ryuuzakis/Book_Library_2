@@ -28,21 +28,21 @@ public class BookServiceTest {
 	
 	
 	@Test
-	public void getAllBooksTest() {
-		bookService.getAllBooks();
-		Mockito.verify(bookBean).getAllBooks();
+	public void getBooksTest() {
+		bookService.getBooks("tata", "toto", false);
+		Mockito.verify(bookBean).getBooks("tata", "toto", false);
 	}
 	
 	@Test
-	public void getAllBooksYearAscTest() {
-		bookService.getAllBooksYearAsc();
-		Mockito.verify(bookBean).getAllBooksOrderedByYearAsc();
+	public void getBooksOrderedByYearAscTest() {
+		bookService.getBooksOrderedByYear("toto", "tata", true, false);
+		Mockito.verify(bookBean).getBooksOrderedByYearAsc("toto", "tata", false);
 	}
 	
 	@Test
-	public void getAllBooksYearDescTest() {
-		bookService.getAllBooksYearDesc();
-		Mockito.verify(bookBean).getAllBooksOrderedByYearDesc();
+	public void getBooksOrderedByYearDescTest() {
+		bookService.getBooksOrderedByYear("toto", "tata", false, false);
+		Mockito.verify(bookBean).getBooksOrderedByYearDesc("toto", "tata", false);
 	}
 
 }
