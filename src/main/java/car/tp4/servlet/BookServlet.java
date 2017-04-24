@@ -40,7 +40,6 @@ public class BookServlet extends HttpServlet {
 
 		List<Book> books = getBooks(request);
 		
-		request.getSession().getAttribute("basket");
 		request.setAttribute("books", books);
 		request.setAttribute("basket", basket);
 		final RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/book.jsp");

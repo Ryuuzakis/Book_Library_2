@@ -10,6 +10,21 @@
         <title>Home</title>
     </head>
     <body>
+        <%
+            String error = (String) request.getAttribute("error");
+
+            if (error != null) {%>
+                <h1>Erreur</h1>
+
+                    L'erreur suivante s'est produite lors de l'une de vos actions :<br />
+                    <%= error %><br />
+                    <a href="/books">Retour à la liste des livres </a>
+            <%
+            }
+        %>
+
+
+
         <h2>Gestion des livres</h2>
         <form action="create" method="GET">
             <input type="submit" value="Créer un nouveau livre"/>

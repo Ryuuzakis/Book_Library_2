@@ -1,5 +1,6 @@
 package car.tp4.servlet;
 
+import car.tp4.exceptions.NegativeQuantityException;
 import car.tp4.services.BookService;
 
 import javax.ejb.EJB;
@@ -25,7 +26,6 @@ public class StockServlet extends HttpServlet {
 	@Override
 	protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
 			throws ServletException, IOException {
-
 		request.setAttribute("stocks", bookService.getBooks("", "", true));
 		final RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/stock-list.jsp");
 		dispatcher.forward(request, response);
@@ -41,8 +41,14 @@ public class StockServlet extends HttpServlet {
 		
 		final int quantity = Integer.parseInt(request.getParameter("quantity"));
 
-		bookService.addQuantity(stockId, quantity);
-
-		response.sendRedirect("/stock");
+		try {
+			bookService.addQuantity(stockId, quantity);
+			response.sendRedirect("/stock");
+		} catch(NegativeQuantityException e) {
+			System.out.println("error " + e.getMessage());
+			request.setAttribute("error", e.getMessage());
+			final RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/stock-list.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 }

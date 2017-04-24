@@ -6,11 +6,12 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import car.tp4.entity.Book;
+import car.tp4.exceptions.NegativeQuantityException;
 import car.tp4.persistence.BookBean;
 
 /**
  * 
- * @author Louis GUILBERT & Jonathan LECOINTe
+ * @author Louis GUILBERT & Jonathan LECOINTE
  *
  * BookService : 
  * gère les fonctionnalités de recherche/ajout de livre
@@ -45,11 +46,11 @@ public class BookService {
 		}
 	}
 
-	public void addQuantity(final long bookId, final int qty) {
+	public void addQuantity(final long bookId, final int qty) throws NegativeQuantityException {
 		final Book book = bookBean.getBookById(bookId);
 
 		if (qty < 1) {
-			// TODO: error
+			throw new NegativeQuantityException();
 		}
 
 		book.setQuantity(book.getQuantity() + qty);

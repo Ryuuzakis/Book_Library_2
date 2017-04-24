@@ -10,6 +10,20 @@
     <body>
         <h2>Books stock</h2>
         <%
+                    String error = (String) request.getAttribute("error");
+
+                    if (error != null) {%>
+                    <div style="color: red">
+                        <h1>Erreur</h1>
+
+                            L'erreur suivante s'est produite lors de l'une de vos actions :<br />
+                            <%= error %><br />
+                    </div>
+                    <%
+                    }
+                %>
+
+        <%
             Collection<Book> stocks = (Collection<Book>) request.getAttribute("stocks");
 
             for (Book stock: stocks) {
