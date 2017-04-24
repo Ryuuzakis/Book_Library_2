@@ -9,6 +9,11 @@ import car.tp4.entity.Book;
 import car.tp4.entity.BookOrder;
 import car.tp4.entity.OrderEntry;
 
+/**
+ * Classe permettant de gérer les accès à la table Basket
+ *
+ * @author Louis GUILBERT & Jonathan LECOINTE
+ */
 @Stateless
 @Local
 public class BasketBean {
